@@ -1,4 +1,4 @@
-# DC-React-Gallery
+# React-Gallery
 React component to display a gallery widget
 
 ** This component is currently in progress **
