@@ -2,11 +2,12 @@
   "name": "DC-React-Gallery",
   "version": "0.0.1",
   "description": "React component to display a gallery widget",
-  "main": "index.js",
+  "main": "lib/ReactGallery.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors",
+    "start": "webpack-dev-server --progress --colors --content-base ./demo",
     "build": "webpack",
-    "test": "node test/index.js"
+    "test": "node test/index.js",
+    "dist": "gulp"
   },
   "keywords": [
     "react",
@@ -26,7 +27,9 @@
     "babel-preset-react": "6.3.13",
     "extract-text-webpack-plugin": "1.0.1",
     "webpack": "1.12.13",
-    "webpack-dev-server": "1.14.1"
+    "webpack-dev-server": "1.14.1",
+    "gulp": "^3.9.0",
+    "gulp-babel": "5.2.1"
   },
   "dependencies": {
     "react": "0.14.7",
