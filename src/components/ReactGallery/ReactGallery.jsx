@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import request from 'superagent'
 import jsonp from 'superagent-jsonp'
-import * as ReactGalleryActions from './actions/ReactGalleryActions.js'
+import * as ReactGalleryActions from '../../actions/ReactGalleryActions.js'
 require('./ReactGallery.css')
 
 @connect((state) => ({

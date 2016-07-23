@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --progress --colors --content-base ./demo",
     "build": "webpack",
-    "test": "node test/index.js",
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register test/*/**.js",
     "dist": "gulp"
   },
   "keywords": [
@@ -23,16 +23,18 @@
   "devDependencies": {
     "babel-polyfill": "^6.0.0",
     "babel-preset-es2015-webpack": "^6.0.0",
+    "chai": "^3.5.0",
     "css-loader": "0.23.1",
     "extract-text-webpack-plugin": "1.0.1",
-    "lost": "6.7.2",
-    "webpack": "1.12.13",
-    "webpack-dev-server": "1.14.1",
-    "style-loader": "0.13.1",
     "gulp": "3.9.0",
     "gulp-babel": "^6.0.0",
+    "lost": "6.7.2",
+    "mocha": "^2.5.3",
     "postcss-loader": "0.9.1",
-    "postcss-nested": "1.0.0"
+    "postcss-nested": "1.0.0",
+    "style-loader": "0.13.1",
+    "webpack": "1.12.13",
+    "webpack-dev-server": "1.14.1"
   },
   "dependencies": {
     "babel": "^6.0.0",
