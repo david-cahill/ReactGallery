@@ -3,7 +3,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import ReactGalleryReducer from '../../reducers/ReactGalleryReducer.js'
 import ReactGallery from '../ReactGallery/ReactGallery.jsx'
-const initialState = { media: [] }
+import initialState from '../../lib/initialState.js'
 const store = createStore(ReactGalleryReducer, initialState)
 
 export default class Root extends Component {
