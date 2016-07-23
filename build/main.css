@@ -1,0 +1,14 @@
+.ReactGallery {
+  margin: 0;
+}
+
+.ReactGallery-image {
+  opacity: 0;
+  transition: all 0.6s ease;
+  animation: fadeIn 4s forwards 5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

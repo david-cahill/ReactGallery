@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
-import ReactGallery from '../src/ReactGallery.jsx'
+import ReactGallery from '../src/Root.jsx'
 
 render(
-  <ReactGallery/>,
+  <ReactGallery instagramUsername="" accessToken="" />,
   document.getElementById('app')
 )
