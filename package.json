@@ -2,7 +2,7 @@
   "name": "DC-React-Gallery",
   "version": "0.0.1",
   "description": "React component to display a gallery widget",
-  "main": "lib/ReactGallery.js",
+  "main": "dist/dc-react-gallery.js",
   "scripts": {
     "start": "webpack-dev-server --hot --progress --colors --content-base ./demo",
     "build": "webpack",
