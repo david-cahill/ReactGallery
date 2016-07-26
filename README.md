@@ -1,4 +1,4 @@
-# React-Gallery
+# ReactGallery
 React component to display a gallery widget
 
 ** This component is currently a work in progress **
