@@ -1,7 +1,7 @@
 # React-Gallery
 React component to display a gallery widget
 
-** This component is currently in progress **
+** This component is currently a work in progress **
 
 This is an example of a basic reusable React component.
 

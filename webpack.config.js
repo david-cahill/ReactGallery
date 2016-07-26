@@ -4,7 +4,7 @@ module.exports = {
     './demo/example.jsx'
   ],
   output: {
-      path: __dirname + '/build',
+    path: __dirname + '/build',
     filename: 'bundle.js'
   },
   plugins: [],
