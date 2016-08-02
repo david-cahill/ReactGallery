@@ -4,7 +4,7 @@ import * as ReactGalleryActions from '../../actions/ReactGalleryActions.js'
 require('./SelectedImage.css')
 
 @connect((state) => ({
-  media: state.media,
+  media: state.media.data,
   showOverlay: state.showOverlay,
   selectedImageIndex: state.selectedImageIndex
 }), ReactGalleryActions)
@@ -24,7 +24,7 @@ export default class SelectedImage extends Component {
   render() {
     const { media, selectedImageIndex, showOverlay } = this.props
     const overlayShadowClassName = showOverlay ? 'SelectedImage-shadow is-visible' : 'SelectedImage-shadow'
-    const imageSource = media[selectedImageIndex] && media[selectedImageIndex].images.standard_resolution.url
+    const imageSource = media && media[selectedImageIndex] && media[selectedImageIndex].images.standard_resolution.url
     return (
       <div onClick={ this.overlayClickHandler.bind(this) } className="SelectedImage">
         { imageSource && <img className="SelectedImage-image" src={imageSource} /> }

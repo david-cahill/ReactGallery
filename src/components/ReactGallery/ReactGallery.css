@@ -2,12 +2,5 @@
 
 .ReactGallery {
   &-image {
-    opacity: 0;
-    animation: fadeIn 2s forwards 2s;
   }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
 }

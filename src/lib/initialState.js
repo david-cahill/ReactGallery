@@ -1,1 +1,1 @@
-export default { media: [], showOverlay: false, selectedImageIndex: null }
+export default { media: { data: [] }, showOverlay: false, selectedImageIndex: null }

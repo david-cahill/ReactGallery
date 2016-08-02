@@ -3,7 +3,11 @@ export default (state = {}, action) => {
   case 'SET_MEDIA':
     return ({
       ...state,
-      media: action.media
+      media: {
+        ...state.media,
+        ...action.media,
+        data: state.media.data.concat(action.media.data)
+      }
     })
   break
   case 'SHOW_OVERLAY':

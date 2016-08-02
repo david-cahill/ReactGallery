@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import request from 'superagent'
-import jsonp from 'superagent-jsonp'
 import * as ReactGalleryActions from '../../actions/ReactGalleryActions.js'
 import SelectedImage from '../../components/SelectedImage/SelectedImage.jsx'
 require('./ReactGallery.css')
 
 @connect((state) => ({
-  media: state.media
+  media: state.media.data,
+  pagination: state.media.pagination
 }), { ...ReactGalleryActions })
 export default class ReactGallery extends Component {
   static propTypes = {
@@ -17,16 +16,8 @@ export default class ReactGallery extends Component {
   }
 
   renderInstagramPhotos({ instagramUsername, accessToken }) {
-    const { setMedia } = this.props
-    request
-    .get(`https://api.instagram.com/v1/users/${instagramUsername}/media/recent/?access_token=${accessToken}`)
-    .use(jsonp({
-      timeout: 3000
-    }))
-    .end((err, { body: { data: media } }) => {
-      if (err) return console.error(err)
-      setMedia({ media })
-    })
+    const { fetchInstagramPhotos } = this.props
+    fetchInstagramPhotos({ instagramUsername, accessToken })
   }
 
   componentDidMount() {
@@ -40,15 +31,23 @@ export default class ReactGallery extends Component {
     setSelectedImageIndex({ index })
   }
 
+  showMoreHandler() {
+    const { pagination, fetchInstagramPhotos, instagramUsername, accessToken } = this.props
+    fetchInstagramPhotos({ instagramUsername, accessToken, pagination })
+  }
+
   render() {
     const { media } = this.props
     return (
       <div className="ReactGallery">
         <SelectedImage />
-        { media && media.map(({ images: { thumbnail: { url } } }, i) => {
-            return <img onClick={() => this.imageClickHandler(i)} key={i} className="ReactGallery-image" src={url} />
-          })
-        }
+        <div className="ReactGallery-images">
+          { media && media.map(({ images: { thumbnail: { url } } }, i) => {
+              return <img onClick={() => this.imageClickHandler(i)} key={i} className="ReactGallery-image" src={url} />
+            })
+          }
+        </div>
+        <button onClick={ this.showMoreHandler.bind(this)} type="button">Show more...</button>
       </div>
     )
   }
