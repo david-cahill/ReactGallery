@@ -24,10 +24,11 @@ export default class SelectedImage extends Component {
   render() {
     const { media, selectedImageIndex, showOverlay } = this.props
     const overlayShadowClassName = showOverlay ? 'SelectedImage-shadow is-visible' : 'SelectedImage-shadow'
+    const imageSource = media[selectedImageIndex] && media[selectedImageIndex].images.standard_resolution.url
     return (
-      <div className="SelectedImage">
-        { selectedImageIndex && <img className="SelectedImage-image" src={media[selectedImageIndex].images.standard_resolution.url} /> }
-        <div onClick={ this.overlayClickHandler.bind(this) } className={overlayShadowClassName}></div>
+      <div onClick={ this.overlayClickHandler.bind(this) } className="SelectedImage">
+        { imageSource && <img className="SelectedImage-image" src={imageSource} /> }
+        <div className={overlayShadowClassName}></div>
       </div>
     )
   }
