@@ -2,17 +2,20 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import * as ReactGalleryActions from '../../actions/ReactGalleryActions.js'
 import SelectedImage from '../../components/SelectedImage/SelectedImage.jsx'
+import ShadowOverlay from '../../components/ShadowOverlay/ShadowOverlay.jsx'
 require('./ReactGallery.css')
 
 @connect((state) => ({
   media: state.media.data,
-  pagination: state.media.pagination
+  pagination: state.media.pagination,
+  showOverlay: state.showOverlay
 }), { ...ReactGalleryActions })
 export default class ReactGallery extends Component {
   static propTypes = {
     media: PropTypes.array,
     switchOverlayOn: PropTypes.func,
-    setSelectedImageIndex: PropTypes.func
+    setSelectedImageIndex: PropTypes.func,
+    showOverlay: PropTypes.bool
   }
 
   renderInstagramPhotos({ instagramUsername, accessToken }) {
@@ -37,9 +40,10 @@ export default class ReactGallery extends Component {
   }
 
   render() {
-    const { media } = this.props
+    const { media, showOverlay, switchOverlayOff } = this.props
     return (
       <div className="ReactGallery">
+        <ShadowOverlay showOverlay={showOverlay} switchOverlayOff={switchOverlayOff} />
         <SelectedImage />
         <div className="ReactGallery-images">
           { media && media.map(({ images: { thumbnail: { url } } }, i) => {
@@ -47,7 +51,7 @@ export default class ReactGallery extends Component {
             })
           }
         </div>
-        <button onClick={ this.showMoreHandler.bind(this)} type="button">Show more...</button>
+        <button onClick={ this.showMoreHandler.bind(this) } type="button">Show more...</button>
       </div>
     )
   }

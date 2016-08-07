@@ -1,0 +1,14 @@
+.ShadowOverlay {
+  position: fixed;
+  width: 100%;
+  min-height: 100%;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+  bottom: 0;
+  &.is-visible {
+    opacity: 0.8;
+    z-index: 10;
+  }
+}

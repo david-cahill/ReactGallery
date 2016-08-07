@@ -29,8 +29,7 @@ export function setSelectedImageIndex({ index }) {
 
 export function fetchInstagramPhotos({ instagramUsername, accessToken, pagination }) {
   return (dispatch) => {
-    // TODO tidy up logic
-    const url = pagination && pagination.next_url ? pagination.next_url : `https://api.instagram.com/v1/users/${instagramUsername}/media/recent/?access_token=${accessToken}&count=12`
+    const url = pagination && pagination.next_url ? pagination.next_url : `https://api.instagram.com/v1/users/${instagramUsername}/media/recent/?access_token=${accessToken}&count=6`
     request
       .get(url)
       .use(jsonp({

@@ -1,6 +1,11 @@
-@lost flexbox flex;
-
 .ReactGallery {
+  &-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   &-image {
+    padding: 5px;
+    cursor: pointer;
   }
 }
