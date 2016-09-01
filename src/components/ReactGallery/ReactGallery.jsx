@@ -47,7 +47,7 @@ export default class ReactGallery extends Component {
   }
 
   render() {
-    const { media, showOverlay, selectedImageIndex } = this.props
+    const { media, showOverlay, selectedImageIndex, galleryDirection } = this.props
     const showSelectedImage = (selectedImageIndex !== null && selectedImageIndex > -1)
     return (
       <div className="ReactGallery">

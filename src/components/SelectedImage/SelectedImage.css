@@ -8,11 +8,32 @@
     bottom: 0;
     margin: auto;
     z-index: 15;
+    opacity: 0;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+  &-leftItem {
     &.is-visible {
       opacity: 1;
+      transform: translateX(-100%);
+      animation-name: SelectedImage-translateIn;
     }
-    &.is-hidden {
-      opacity: 0;
+  }
+  &-rightItem {
+    &.is-visible {
+      opacity: 1;
+      transform: translateX(100%);
+      animation-name: SelectedImage-translateIn
     }
+  }
+}
+
+@keyframes SelectedImage-translateIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

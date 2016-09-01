@@ -1,4 +1,4 @@
-export default (state = { selectedImageIndex: null }, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
   case 'SET_MEDIA':
     return ({
@@ -27,6 +27,12 @@ export default (state = { selectedImageIndex: null }, action) => {
     return ({
       ...state,
       selectedImageIndex: action.index
+    })
+  break
+  case 'SET_GALLERY_DIRECTION':
+    return ({
+      ...state,
+      galleryDirection: action.galleryDirection
     })
   break
   default:

@@ -6,24 +6,28 @@ require('./SelectedImage.css')
 @connect((state) => ({
   media: state.media.data,
   showOverlay: state.showOverlay,
-  selectedImageIndex: state.selectedImageIndex
+  selectedImageIndex: state.selectedImageIndex,
+  galleryDirection: state.galleryDirection
 }), ReactGalleryActions)
 export default class SelectedImage extends Component {
   static propTypes = {
     media: PropTypes.array,
     showOverlay: PropTypes.bool,
     switchOverlayOff: PropTypes.func,
-    selectedImageIndex: PropTypes.number
+    selectedImageIndex: PropTypes.number,
+    galleryDirection: PropTypes.string
   }
 
   onKeyDown = ({ code }) => {
-    const { media, selectedImageIndex, setSelectedImageIndex } = this.props
+    const { media, selectedImageIndex, setSelectedImageIndex, setGalleryDirection } = this.props
     if (code === 'ArrowRight') {
       const index = selectedImageIndex < (media.length - 1) ? selectedImageIndex + 1 : 0
       setSelectedImageIndex({ index })
+      setGalleryDirection('right')
     } else if (code === 'ArrowLeft') {
       const index = selectedImageIndex !== 0 ? selectedImageIndex - 1 : (media.length - 1)
       setSelectedImageIndex({ index })
+      setGalleryDirection('left')
     }
   }
 
@@ -44,13 +48,13 @@ export default class SelectedImage extends Component {
   }
 
   render() {
-    const { media, selectedImageIndex } = this.props
+    const { media, selectedImageIndex, galleryDirection } = this.props
     return (
       <div onClick={ this.selectedImageClickHandler.bind(this) } className="SelectedImage">
         {
           media.map((item, i) => {
             const isVisible = selectedImageIndex === i
-            const className = `SelectedImage-image${isVisible ? ' is-visible' : ' is-hidden'}`
+            const className = `SelectedImage-image SelectedImage-${galleryDirection}Item${isVisible ? ' is-visible' : ' is-hidden'}`
             return <img key={i} className={className} src={item.images.standard_resolution.url} />
           })
         }
