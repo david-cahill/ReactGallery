@@ -8,5 +8,11 @@
     bottom: 0;
     margin: auto;
     z-index: 15;
+    &.is-visible {
+      opacity: 1;
+    }
+    &.is-hidden {
+      opacity: 0;
+    }
   }
 }

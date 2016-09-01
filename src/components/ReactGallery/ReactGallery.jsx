@@ -8,7 +8,8 @@ require('./ReactGallery.css')
 @connect((state) => ({
   media: state.media.data,
   pagination: state.media.pagination,
-  showOverlay: state.showOverlay
+  showOverlay: state.showOverlay,
+  selectedImageIndex: state.selectedImageIndex
 }), { ...ReactGalleryActions })
 export default class ReactGallery extends Component {
   static propTypes = {
@@ -39,12 +40,19 @@ export default class ReactGallery extends Component {
     fetchInstagramPhotos({ instagramUsername, accessToken, pagination })
   }
 
+  shadowOverlayClickHandler() {
+    const { switchOverlayOff, setSelectedImageIndex } = this.props
+    switchOverlayOff()
+    setSelectedImageIndex({ index: null })
+  }
+
   render() {
-    const { media, showOverlay, switchOverlayOff } = this.props
+    const { media, showOverlay, selectedImageIndex } = this.props
+    const showSelectedImage = (selectedImageIndex !== null && selectedImageIndex > -1)
     return (
       <div className="ReactGallery">
-        <ShadowOverlay showOverlay={showOverlay} switchOverlayOff={switchOverlayOff} />
-        <SelectedImage />
+        <ShadowOverlay showOverlay={showOverlay} clickHandler={this.shadowOverlayClickHandler.bind(this)} />
+        { showSelectedImage && <SelectedImage /> }
         <div className="ReactGallery-images">
           { media && media.map(({ images: { thumbnail: { url } } }, i) => {
               return <img onClick={() => this.imageClickHandler(i)} key={i} className="ReactGallery-image" src={url} />

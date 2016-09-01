@@ -16,12 +16,44 @@ export default class SelectedImage extends Component {
     selectedImageIndex: PropTypes.number
   }
 
+  onKeyDown = ({ code }) => {
+    const { media, selectedImageIndex, setSelectedImageIndex } = this.props
+    if (code === 'ArrowRight') {
+      const index = selectedImageIndex < (media.length - 1) ? selectedImageIndex + 1 : 0
+      setSelectedImageIndex({ index })
+    } else if (code === 'ArrowLeft') {
+      const index = selectedImageIndex !== 0 ? selectedImageIndex - 1 : (media.length - 1)
+      setSelectedImageIndex({ index })
+    }
+  }
+
+  onKeyDownBound = this.onKeyDown.bind(this)
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.onKeyDownBound)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeyDownBound)
+  }
+
+  selectedImageClickHandler() {
+    const { switchOverlayOff, setSelectedImageIndex } = this.props
+    switchOverlayOff()
+    setSelectedImageIndex({ index: null })
+  }
+
   render() {
-    const { media, selectedImageIndex, switchOverlayOff } = this.props
-    const imageSource = media && media[selectedImageIndex] && media[selectedImageIndex].images.standard_resolution.url
+    const { media, selectedImageIndex } = this.props
     return (
-      <div onClick={ switchOverlayOff } className="SelectedImage">
-        { imageSource && <img className="SelectedImage-image" src={imageSource} /> }
+      <div onClick={ this.selectedImageClickHandler.bind(this) } className="SelectedImage">
+        {
+          media.map((item, i) => {
+            const isVisible = selectedImageIndex === i
+            const className = `SelectedImage-image${isVisible ? ' is-visible' : ' is-hidden'}`
+            return <img key={i} className={className} src={item.images.standard_resolution.url} />
+          })
+        }
       </div>
     )
   }

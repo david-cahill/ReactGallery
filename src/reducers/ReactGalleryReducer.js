@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = { selectedImageIndex: null }, action) => {
   switch (action.type) {
   case 'SET_MEDIA':
     return ({
