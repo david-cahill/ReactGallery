@@ -1,15 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import * as ReactGalleryActions from '../../actions/ReactGalleryActions.js'
-require('./SelectedImage.css')
+if (process.browser) require('./SelectedImage.css')
 
-@connect((state) => ({
-  media: state.media.data,
-  showOverlay: state.showOverlay,
-  selectedImageIndex: state.selectedImageIndex,
-  galleryDirection: state.galleryDirection
-}), ReactGalleryActions)
-export default class SelectedImage extends Component {
+export class SelectedImage extends Component {
   static propTypes = {
     media: PropTypes.array,
     showOverlay: PropTypes.bool,
@@ -62,3 +56,10 @@ export default class SelectedImage extends Component {
     )
   }
 }
+
+export default connect((state) => ({
+  media: state.media.data,
+  showOverlay: state.showOverlay,
+  selectedImageIndex: state.selectedImageIndex,
+  galleryDirection: state.galleryDirection
+}), ReactGalleryActions)(SelectedImage)

@@ -3,15 +3,9 @@ import { connect } from 'react-redux'
 import * as ReactGalleryActions from '../../actions/ReactGalleryActions.js'
 import SelectedImage from '../../components/SelectedImage/SelectedImage.jsx'
 import ShadowOverlay from '../../components/ShadowOverlay/ShadowOverlay.jsx'
-require('./ReactGallery.css')
+if (process.browser) require('./ReactGallery.css')
 
-@connect((state) => ({
-  media: state.media.data,
-  pagination: state.media.pagination,
-  showOverlay: state.showOverlay,
-  selectedImageIndex: state.selectedImageIndex
-}), { ...ReactGalleryActions })
-export default class ReactGallery extends Component {
+export class ReactGallery extends Component {
   static propTypes = {
     media: PropTypes.array,
     switchOverlayOn: PropTypes.func,
@@ -72,3 +66,10 @@ export default class ReactGallery extends Component {
     )
   }
 }
+
+export default connect((state) => ({
+  media: state.media.data,
+  pagination: state.media.pagination,
+  showOverlay: state.showOverlay,
+  selectedImageIndex: state.selectedImageIndex
+}), { ...ReactGalleryActions })(ReactGallery)

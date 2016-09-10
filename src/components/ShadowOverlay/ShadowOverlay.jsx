@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-require('./ShadowOverlay.css')
+if (process.browser) require('./ShadowOverlay.css')
 
 export default class ShadowOverlay extends Component {
   render() {

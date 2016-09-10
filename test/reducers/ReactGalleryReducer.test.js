@@ -11,16 +11,17 @@ beforeEach(() => {
 
 describe('ReactGalleryReducer', () => {
   it('should update state.media when SET_MEDIA is called', () => {
-    assert.equal(store.getState().media.length, 0)
+    assert.equal(store.getState().media.data.length, 0)
     store.dispatch(setMedia({
-      media:
-      [{
-        image: 'http://instagram.com/imcool'
-      },{
-        image: 'http://instagram.com/selfie-legend'
-      }]
+      media: { data:
+        [{
+          image: 'http://instagram.com/imcool'
+        },{
+          image: 'http://instagram.com/selfie-legend'
+        }]
+      }
     }))
-    assert.equal(store.getState().media.length, 2)
+    assert.equal(store.getState().media.data.length, 2)
   })
 
   it('should update state.showOverlay when SHOW_OVERLAY is called', () => {
