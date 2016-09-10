@@ -9,6 +9,12 @@ module.exports = {
   },
   plugins: [],
   module: {
+    preLoaders: [
+      {
+        test: /\.json$/,
+        loader: 'json'
+      }
+    ],
     loaders: [
       {
         test: /\.(js|jsx)$/,

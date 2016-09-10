@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "images": {
+        "thumbnail": {
+          "url": "//c2.staticflickr.com/9/8750/28896232145_873323bb28_k.jpg"
+        },
+        "standard_resolution": {
+          "url": "//c2.staticflickr.com/9/8750/28896232145_873323bb28_k.jpg"
+        }
+      }
+    },
+    {
+      "images": {
+        "thumbnail": {
+          "url": "//c2.staticflickr.com/9/8786/28821004281_55800db225_k.jpg"
+        },
+        "standard_resolution": {
+          "url": "//c2.staticflickr.com/9/8786/28821004281_55800db225_k.jpg"
+        }
+      }
+    }
+  ]
+}

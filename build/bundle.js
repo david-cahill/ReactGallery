@@ -8134,7 +8134,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	(0, _reactDom.render)(_react2.default.createElement(_Root2.default, { instagramUsername: 'self', accessToken: '27871683.3f8ba7d.66245c360bb9430898014492f350e640' }), document.getElementById('app'));
+	// TODO publish to npm
+	var images = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"json!./data/images.json\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	(0, _reactDom.render)(_react2.default.createElement(_Root2.default, { images: images, instagramUsername: 'self', accessToken: '27871683.3f8ba7d.66245c360bb9430898014492f350e640' }), document.getElementById('app'));
 
 /***/ },
 /* 299 */
@@ -27659,17 +27661,21 @@
 
 	var _redux = __webpack_require__(457);
 
-	var _reactRedux = __webpack_require__(470);
+	var _reduxThunk = __webpack_require__(470);
 
-	var _ReactGalleryReducer = __webpack_require__(479);
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _reactRedux = __webpack_require__(471);
+
+	var _ReactGalleryReducer = __webpack_require__(480);
 
 	var _ReactGalleryReducer2 = _interopRequireDefault(_ReactGalleryReducer);
 
-	var _ReactGallery = __webpack_require__(480);
+	var _ReactGallery = __webpack_require__(481);
 
 	var _ReactGallery2 = _interopRequireDefault(_ReactGallery);
 
-	var _initialState = __webpack_require__(495);
+	var _initialState = __webpack_require__(499);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
@@ -27681,7 +27687,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var store = (0, _redux.createStore)(_ReactGalleryReducer2.default, _initialState2.default);
+	var store = (0, _redux.createStore)(_ReactGalleryReducer2.default, _initialState2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
 	var Root = function (_Component) {
 	  _inherits(Root, _Component);
@@ -28550,6 +28556,34 @@
 
 /***/ },
 /* 470 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch;
+	    var getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+
+	exports['default'] = thunk;
+
+/***/ },
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28557,11 +28591,11 @@
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 
-	var _Provider = __webpack_require__(471);
+	var _Provider = __webpack_require__(472);
 
 	var _Provider2 = _interopRequireDefault(_Provider);
 
-	var _connect = __webpack_require__(474);
+	var _connect = __webpack_require__(475);
 
 	var _connect2 = _interopRequireDefault(_connect);
 
@@ -28571,7 +28605,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 471 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28581,11 +28615,11 @@
 
 	var _react = __webpack_require__(299);
 
-	var _storeShape = __webpack_require__(472);
+	var _storeShape = __webpack_require__(473);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
-	var _warning = __webpack_require__(473);
+	var _warning = __webpack_require__(474);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -28655,7 +28689,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 472 */
+/* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28671,7 +28705,7 @@
 	});
 
 /***/ },
-/* 473 */
+/* 474 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28700,7 +28734,7 @@
 	}
 
 /***/ },
-/* 474 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28712,19 +28746,19 @@
 
 	var _react = __webpack_require__(299);
 
-	var _storeShape = __webpack_require__(472);
+	var _storeShape = __webpack_require__(473);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
-	var _shallowEqual = __webpack_require__(475);
+	var _shallowEqual = __webpack_require__(476);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _wrapActionCreators = __webpack_require__(476);
+	var _wrapActionCreators = __webpack_require__(477);
 
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 
-	var _warning = __webpack_require__(473);
+	var _warning = __webpack_require__(474);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -28732,11 +28766,11 @@
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _hoistNonReactStatics = __webpack_require__(477);
+	var _hoistNonReactStatics = __webpack_require__(478);
 
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-	var _invariant = __webpack_require__(478);
+	var _invariant = __webpack_require__(479);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -29099,7 +29133,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 475 */
+/* 476 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29130,7 +29164,7 @@
 	}
 
 /***/ },
-/* 476 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29147,7 +29181,7 @@
 	}
 
 /***/ },
-/* 477 */
+/* 478 */
 /***/ function(module, exports) {
 
 	/**
@@ -29203,7 +29237,7 @@
 
 
 /***/ },
-/* 478 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -29261,7 +29295,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 479 */
+/* 480 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29279,7 +29313,9 @@
 	  switch (action.type) {
 	    case 'SET_MEDIA':
 	      return _extends({}, state, {
-	        media: action.media
+	        media: _extends({}, state.media, action.media, {
+	          data: state.media.data.concat(action.media.data)
+	        })
 	      });
 	      break;
 	    case 'SHOW_OVERLAY':
@@ -29298,13 +29334,18 @@
 	        selectedImageIndex: action.index
 	      });
 	      break;
+	    case 'SET_GALLERY_DIRECTION':
+	      return _extends({}, state, {
+	        galleryDirection: action.galleryDirection
+	      });
+	      break;
 	    default:
 	      return state;
 	  }
 	};
 
 /***/ },
-/* 480 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29324,23 +29365,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(470);
+	var _reactRedux = __webpack_require__(471);
 
-	var _superagent = __webpack_require__(481);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _superagentJsonp = __webpack_require__(486);
-
-	var _superagentJsonp2 = _interopRequireDefault(_superagentJsonp);
-
-	var _ReactGalleryActions = __webpack_require__(487);
+	var _ReactGalleryActions = __webpack_require__(482);
 
 	var ReactGalleryActions = _interopRequireWildcard(_ReactGalleryActions);
 
-	var _SelectedImage = __webpack_require__(488);
+	var _SelectedImage = __webpack_require__(489);
 
 	var _SelectedImage2 = _interopRequireDefault(_SelectedImage);
+
+	var _ShadowOverlay = __webpack_require__(494);
+
+	var _ShadowOverlay2 = _interopRequireDefault(_ShadowOverlay);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -29352,11 +29389,14 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(493);
+	__webpack_require__(497);
 
 	var ReactGallery = (_dec = (0, _reactRedux.connect)(function (state) {
 	  return {
-	    media: state.media
+	    media: state.media.data,
+	    pagination: state.media.pagination,
+	    showOverlay: state.showOverlay,
+	    selectedImageIndex: state.selectedImageIndex
 	  };
 	}, _extends({}, ReactGalleryActions)), _dec(_class = (_temp = _class2 = function (_Component) {
 	  _inherits(ReactGallery, _Component);
@@ -29372,16 +29412,9 @@
 	    value: function renderInstagramPhotos(_ref) {
 	      var instagramUsername = _ref.instagramUsername;
 	      var accessToken = _ref.accessToken;
-	      var setMedia = this.props.setMedia;
+	      var fetchInstagramPhotos = this.props.fetchInstagramPhotos;
 
-	      _superagent2.default.get('https://api.instagram.com/v1/users/' + instagramUsername + '/media/recent/?access_token=' + accessToken).use((0, _superagentJsonp2.default)({
-	        timeout: 3000
-	      })).end(function (err, _ref2) {
-	        var media = _ref2.body.data;
-
-	        if (err) return console.error(err);
-	        setMedia({ media: media });
-	      });
+	      fetchInstagramPhotos({ instagramUsername: instagramUsername, accessToken: accessToken });
 	    }
 	  }, {
 	    key: 'componentDidMount',
@@ -29389,7 +29422,9 @@
 	      var _props = this.props;
 	      var instagramUsername = _props.instagramUsername;
 	      var accessToken = _props.accessToken;
+	      var images = _props.images;
 
+	      console.log(images);
 	      if (instagramUsername && accessToken) this.renderInstagramPhotos({ instagramUsername: instagramUsername, accessToken: accessToken });
 	    }
 	  }, {
@@ -29403,23 +29438,59 @@
 	      setSelectedImageIndex({ index: index });
 	    }
 	  }, {
+	    key: 'showMoreHandler',
+	    value: function showMoreHandler() {
+	      var _props3 = this.props;
+	      var pagination = _props3.pagination;
+	      var fetchInstagramPhotos = _props3.fetchInstagramPhotos;
+	      var instagramUsername = _props3.instagramUsername;
+	      var accessToken = _props3.accessToken;
+
+	      fetchInstagramPhotos({ instagramUsername: instagramUsername, accessToken: accessToken, pagination: pagination });
+	    }
+	  }, {
+	    key: 'shadowOverlayClickHandler',
+	    value: function shadowOverlayClickHandler() {
+	      var _props4 = this.props;
+	      var switchOverlayOff = _props4.switchOverlayOff;
+	      var setSelectedImageIndex = _props4.setSelectedImageIndex;
+
+	      switchOverlayOff();
+	      setSelectedImageIndex({ index: null });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 
-	      var media = this.props.media;
+	      var _props5 = this.props;
+	      var media = _props5.media;
+	      var showOverlay = _props5.showOverlay;
+	      var selectedImageIndex = _props5.selectedImageIndex;
+	      var galleryDirection = _props5.galleryDirection;
 
+	      var showSelectedImage = selectedImageIndex !== null && selectedImageIndex > -1;
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'ReactGallery' },
-	        _react2.default.createElement(_SelectedImage2.default, null),
-	        media && media.map(function (_ref3, i) {
-	          var url = _ref3.images.thumbnail.url;
+	        _react2.default.createElement(_ShadowOverlay2.default, { showOverlay: showOverlay, clickHandler: this.shadowOverlayClickHandler.bind(this) }),
+	        showSelectedImage && _react2.default.createElement(_SelectedImage2.default, null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ReactGallery-images' },
+	          media && media.map(function (_ref2, i) {
+	            var url = _ref2.images.thumbnail.url;
 
-	          return _react2.default.createElement('img', { onClick: function onClick() {
-	              return _this2.imageClickHandler(i);
-	            }, key: i, className: 'ReactGallery-image', src: url });
-	        })
+	            return _react2.default.createElement('img', { onClick: function onClick() {
+	                return _this2.imageClickHandler(i);
+	              }, key: i, className: 'ReactGallery-image', src: url });
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.showMoreHandler.bind(this), type: 'button' },
+	          'Show more...'
+	        )
 	      );
 	    }
 	  }]);
@@ -29428,12 +29499,97 @@
 	}(_react.Component), _class2.propTypes = {
 	  media: _react.PropTypes.array,
 	  switchOverlayOn: _react.PropTypes.func,
-	  setSelectedImageIndex: _react.PropTypes.func
+	  setSelectedImageIndex: _react.PropTypes.func,
+	  showOverlay: _react.PropTypes.bool
 	}, _temp)) || _class);
 	exports.default = ReactGallery;
 
 /***/ },
-/* 481 */
+/* 482 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.setMedia = setMedia;
+	exports.switchOverlayOn = switchOverlayOn;
+	exports.switchOverlayOff = switchOverlayOff;
+	exports.setSelectedImageIndex = setSelectedImageIndex;
+	exports.setGalleryDirection = setGalleryDirection;
+	exports.fetchInstagramPhotos = fetchInstagramPhotos;
+
+	var _superagent = __webpack_require__(483);
+
+	var _superagent2 = _interopRequireDefault(_superagent);
+
+	var _superagentJsonp = __webpack_require__(488);
+
+	var _superagentJsonp2 = _interopRequireDefault(_superagentJsonp);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function setMedia(_ref) {
+	  var media = _ref.media;
+
+	  return {
+	    type: 'SET_MEDIA',
+	    media: media
+	  };
+	}
+
+	function switchOverlayOn() {
+	  return {
+	    type: 'SHOW_OVERLAY'
+	  };
+	}
+
+	function switchOverlayOff() {
+	  return {
+	    type: 'HIDE_OVERLAY'
+	  };
+	}
+
+	function setSelectedImageIndex(_ref2) {
+	  var index = _ref2.index;
+
+	  return {
+	    type: 'SET_SELECTED_IMAGE_INDEX',
+	    index: index
+	  };
+	}
+
+	function setGalleryDirection(galleryDirection) {
+	  return {
+	    type: 'SET_GALLERY_DIRECTION',
+	    galleryDirection: galleryDirection
+	  };
+	}
+
+	function fetchInstagramPhotos(_ref3) {
+	  var instagramUsername = _ref3.instagramUsername;
+	  var accessToken = _ref3.accessToken;
+	  var pagination = _ref3.pagination;
+
+	  return function (dispatch) {
+	    var url = pagination && pagination.next_url ? pagination.next_url : 'https://api.instagram.com/v1/users/' + instagramUsername + '/media/recent/?access_token=' + accessToken + '&count=6';
+	    _superagent2.default.get(url).use((0, _superagentJsonp2.default)({
+	      timeout: 3000
+	    })).end(function (err, _ref4) {
+	      var _ref4$body = _ref4.body;
+	      var pagination = _ref4$body.pagination;
+	      var data = _ref4$body.data;
+
+	      if (err) return console.error(err);
+	      var media = { data: data, pagination: pagination };
+	      dispatch(setMedia({ media: media }));
+	    });
+	  };
+	}
+
+/***/ },
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29450,9 +29606,9 @@
 	  root = this;
 	}
 
-	var Emitter = __webpack_require__(482);
-	var requestBase = __webpack_require__(483);
-	var isObject = __webpack_require__(484);
+	var Emitter = __webpack_require__(484);
+	var requestBase = __webpack_require__(485);
+	var isObject = __webpack_require__(486);
 
 	/**
 	 * Noop.
@@ -29464,7 +29620,7 @@
 	 * Expose `request`.
 	 */
 
-	var request = module.exports = __webpack_require__(485).bind(null, Request);
+	var request = module.exports = __webpack_require__(487).bind(null, Request);
 
 	/**
 	 * Determine XHR.
@@ -30413,7 +30569,7 @@
 
 
 /***/ },
-/* 482 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -30582,13 +30738,13 @@
 
 
 /***/ },
-/* 483 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(484);
+	var isObject = __webpack_require__(486);
 
 	/**
 	 * Clear previous timeout.
@@ -30935,7 +31091,7 @@
 
 
 /***/ },
-/* 484 */
+/* 486 */
 /***/ function(module, exports) {
 
 	/**
@@ -30954,7 +31110,7 @@
 
 
 /***/ },
-/* 485 */
+/* 487 */
 /***/ function(module, exports) {
 
 	// The node and browser modules expose versions of this with the
@@ -30992,7 +31148,7 @@
 
 
 /***/ },
-/* 486 */
+/* 488 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31083,50 +31239,7 @@
 	}
 
 /***/ },
-/* 487 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.setMedia = setMedia;
-	exports.switchOverlayOn = switchOverlayOn;
-	exports.switchOverlayOff = switchOverlayOff;
-	exports.setSelectedImageIndex = setSelectedImageIndex;
-	function setMedia(_ref) {
-	  var media = _ref.media;
-
-	  return {
-	    type: 'SET_MEDIA',
-	    media: media
-	  };
-	}
-
-	function switchOverlayOn() {
-	  return {
-	    type: 'SHOW_OVERLAY'
-	  };
-	}
-
-	function switchOverlayOff() {
-	  return {
-	    type: 'HIDE_OVERLAY'
-	  };
-	}
-
-	function setSelectedImageIndex(_ref2) {
-	  var index = _ref2.index;
-
-	  return {
-	    type: 'SET_SELECTED_IMAGE_INDEX',
-	    index: index
-	  };
-	}
-
-/***/ },
-/* 488 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31138,15 +31251,15 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _dec, _class, _class2, _temp;
+	var _dec, _class, _class2, _temp2;
 
 	var _react = __webpack_require__(299);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(470);
+	var _reactRedux = __webpack_require__(471);
 
-	var _ReactGalleryActions = __webpack_require__(487);
+	var _ReactGalleryActions = __webpack_require__(482);
 
 	var ReactGalleryActions = _interopRequireWildcard(_ReactGalleryActions);
 
@@ -31160,31 +31273,68 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(489);
+	__webpack_require__(490);
 
 	var SelectedImage = (_dec = (0, _reactRedux.connect)(function (state) {
 	  return {
-	    media: state.media,
+	    media: state.media.data,
 	    showOverlay: state.showOverlay,
-	    selectedImageIndex: state.selectedImageIndex
+	    selectedImageIndex: state.selectedImageIndex,
+	    galleryDirection: state.galleryDirection
 	  };
-	}, ReactGalleryActions), _dec(_class = (_temp = _class2 = function (_Component) {
+	}, ReactGalleryActions), _dec(_class = (_temp2 = _class2 = function (_Component) {
 	  _inherits(SelectedImage, _Component);
 
 	  function SelectedImage() {
+	    var _Object$getPrototypeO;
+
+	    var _temp, _this, _ret;
+
 	    _classCallCheck(this, SelectedImage);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SelectedImage).apply(this, arguments));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(SelectedImage)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onKeyDown = function (_ref) {
+	      var code = _ref.code;
+	      var _this$props = _this.props;
+	      var media = _this$props.media;
+	      var selectedImageIndex = _this$props.selectedImageIndex;
+	      var setSelectedImageIndex = _this$props.setSelectedImageIndex;
+	      var setGalleryDirection = _this$props.setGalleryDirection;
+
+	      if (code === 'ArrowRight') {
+	        var index = selectedImageIndex < media.length - 1 ? selectedImageIndex + 1 : 0;
+	        setSelectedImageIndex({ index: index });
+	        setGalleryDirection('right');
+	      } else if (code === 'ArrowLeft') {
+	        var _index = selectedImageIndex !== 0 ? selectedImageIndex - 1 : media.length - 1;
+	        setSelectedImageIndex({ index: _index });
+	        setGalleryDirection('left');
+	      }
+	    }, _this.onKeyDownBound = _this.onKeyDown.bind(_this), _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 
 	  _createClass(SelectedImage, [{
-	    key: 'overlayClickHandler',
-	    value: function overlayClickHandler() {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      document.addEventListener('keydown', this.onKeyDownBound);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      document.removeEventListener('keydown', this.onKeyDownBound);
+	    }
+	  }, {
+	    key: 'selectedImageClickHandler',
+	    value: function selectedImageClickHandler() {
 	      var _props = this.props;
 	      var switchOverlayOff = _props.switchOverlayOff;
-	      var showOverlay = _props.showOverlay;
+	      var setSelectedImageIndex = _props.setSelectedImageIndex;
 
-	      if (showOverlay) switchOverlayOff();
+	      switchOverlayOff();
+	      setSelectedImageIndex({ index: null });
 	    }
 	  }, {
 	    key: 'render',
@@ -31192,14 +31342,16 @@
 	      var _props2 = this.props;
 	      var media = _props2.media;
 	      var selectedImageIndex = _props2.selectedImageIndex;
-	      var showOverlay = _props2.showOverlay;
+	      var galleryDirection = _props2.galleryDirection;
 
-	      var overlayShadowClassName = showOverlay ? 'SelectedImage-shadow is-visible' : 'SelectedImage-shadow';
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'SelectedImage' },
-	        selectedImageIndex && _react2.default.createElement('img', { className: 'SelectedImage-image', src: media[selectedImageIndex].images.standard_resolution.url }),
-	        _react2.default.createElement('div', { onClick: this.overlayClickHandler.bind(this), className: overlayShadowClassName })
+	        { onClick: this.selectedImageClickHandler.bind(this), className: 'SelectedImage' },
+	        media.map(function (item, i) {
+	          var isVisible = selectedImageIndex === i;
+	          var className = 'SelectedImage-image SelectedImage-' + galleryDirection + 'Item' + (isVisible ? ' is-visible' : ' is-hidden');
+	          return _react2.default.createElement('img', { key: i, className: className, src: item.images.standard_resolution.url });
+	        })
 	      );
 	    }
 	  }]);
@@ -31209,21 +31361,22 @@
 	  media: _react.PropTypes.array,
 	  showOverlay: _react.PropTypes.bool,
 	  switchOverlayOff: _react.PropTypes.func,
-	  selectedImageIndex: _react.PropTypes.number
-	}, _temp)) || _class);
+	  selectedImageIndex: _react.PropTypes.number,
+	  galleryDirection: _react.PropTypes.string
+	}, _temp2)) || _class);
 	exports.default = SelectedImage;
 
 /***/ },
-/* 489 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(490);
+	var content = __webpack_require__(491);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(492)(content, {});
+	var update = __webpack_require__(493)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31240,21 +31393,21 @@
 	}
 
 /***/ },
-/* 490 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(491)();
+	exports = module.exports = __webpack_require__(492)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".SelectedImage-shadow {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    background-color: black;\n    opacity: 0;\n    transition: opacity 0.5s ease;\n}\n.SelectedImage-shadow.is-visible {\n    opacity: 0.8;\n    z-index: 10;\n}\n.SelectedImage-image {\n    position: absolute;\n    left: 0;\n    right: 0;\n    margin: 0 auto;\n    z-index: 15;\n}", ""]);
+	exports.push([module.id, ".SelectedImage-image {\n  position: fixed;\n  max-width: 80%;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  margin: auto;\n  z-index: 15;\n  opacity: 0;\n  animation-duration: 0.5s;\n  animation-fill-mode: forwards;\n}\n\n.SelectedImage-leftItem.is-visible {\n  opacity: 1;\n  transform: translateX(-100%);\n  animation-name: SelectedImage-translateIn;\n}\n\n.SelectedImage-rightItem.is-visible {\n  opacity: 1;\n  transform: translateX(100%);\n  animation-name: SelectedImage-translateIn\n}\n\n@keyframes SelectedImage-translateIn {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n    transform: translateX(0);\n  }\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 491 */
+/* 492 */
 /***/ function(module, exports) {
 
 	/*
@@ -31310,7 +31463,7 @@
 
 
 /***/ },
-/* 492 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -31562,16 +31715,109 @@
 
 
 /***/ },
-/* 493 */
+/* 494 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(495);
+
+	var ShadowOverlay = function (_Component) {
+	  _inherits(ShadowOverlay, _Component);
+
+	  function ShadowOverlay() {
+	    _classCallCheck(this, ShadowOverlay);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ShadowOverlay).apply(this, arguments));
+	  }
+
+	  _createClass(ShadowOverlay, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var showOverlay = _props.showOverlay;
+	      var clickHandler = _props.clickHandler;
+
+	      var shadowOverlayClass = showOverlay ? 'ShadowOverlay is-visible' : 'ShadowOverlay';
+	      return _react2.default.createElement('div', { onClick: clickHandler, className: shadowOverlayClass });
+	    }
+	  }]);
+
+	  return ShadowOverlay;
+	}(_react.Component);
+
+	exports.default = ShadowOverlay;
+
+/***/ },
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(494);
+	var content = __webpack_require__(496);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(492)(content, {});
+	var update = __webpack_require__(493)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/postcss-loader/index.js!./ShadowOverlay.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/postcss-loader/index.js!./ShadowOverlay.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 496 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(492)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".ShadowOverlay {\n  position: fixed;\n  width: 100%;\n  min-height: 100%;\n  background-color: black;\n  opacity: 0;\n  transition: opacity 0.5s ease;\n  z-index: -1;\n  bottom: 0;\n}\n.ShadowOverlay.is-visible {\n  opacity: 0.8;\n  z-index: 10;\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 497 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(498);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(493)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31588,29 +31834,29 @@
 	}
 
 /***/ },
-/* 494 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(491)();
+	exports = module.exports = __webpack_require__(492)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".ReactGallery-image { opacity: 0; animation: fadeIn 2s forwards 2s;\n}\n\n@keyframes fadeIn {\n  from { opacity: 0; }\n  to   { opacity: 1; }\n}", ""]);
+	exports.push([module.id, ".ReactGallery-images {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n}\n.ReactGallery-image {\n    padding: 5px;\n    cursor: pointer;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 495 */
+/* 499 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = { media: [], showOverlay: false, selectedImageIndex: null };
+	exports.default = { media: { data: [] }, showOverlay: false, selectedImageIndex: null, galleryDirection: 'left' };
 
 /***/ }
 /******/ ]);

@@ -16,7 +16,13 @@ export default class ReactGallery extends Component {
     media: PropTypes.array,
     switchOverlayOn: PropTypes.func,
     setSelectedImageIndex: PropTypes.func,
-    showOverlay: PropTypes.bool
+    showOverlay: PropTypes.bool,
+    setImageSources: PropTypes.func
+  }
+
+  renderImages(images) {
+    const { setMedia } = this.props
+    setMedia({ media: images })
   }
 
   renderInstagramPhotos({ instagramUsername, accessToken }) {
@@ -25,8 +31,9 @@ export default class ReactGallery extends Component {
   }
 
   componentDidMount() {
-    const { instagramUsername, accessToken } = this.props
-    if (instagramUsername && accessToken) this.renderInstagramPhotos({ instagramUsername, accessToken })
+    const { instagramUsername, accessToken, images } = this.props
+    if (images) return this.renderImages(images)
+    if (instagramUsername && accessToken) return this.renderInstagramPhotos({ instagramUsername, accessToken })
   }
 
   imageClickHandler(index) {
@@ -47,7 +54,8 @@ export default class ReactGallery extends Component {
   }
 
   render() {
-    const { media, showOverlay, selectedImageIndex, galleryDirection } = this.props
+    const { media, showOverlay, selectedImageIndex, accessToken, instagramUsername, images } = this.props
+    const isFromInstagram = accessToken && instagramUsername && !images
     const showSelectedImage = (selectedImageIndex !== null && selectedImageIndex > -1)
     return (
       <div className="ReactGallery">
@@ -59,7 +67,7 @@ export default class ReactGallery extends Component {
             })
           }
         </div>
-        <button onClick={ this.showMoreHandler.bind(this) } type="button">Show more...</button>
+        { isFromInstagram && <button onClick={ this.showMoreHandler.bind(this) } type="button">Show more...</button> }
       </div>
     )
   }

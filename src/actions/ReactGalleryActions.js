@@ -34,6 +34,13 @@ export function setGalleryDirection(galleryDirection) {
   }
 }
 
+export function setImageSources(images) {
+  return {
+    type: 'SET_IMAGE_SOURCES',
+    images
+  }
+}
+
 export function fetchInstagramPhotos({ instagramUsername, accessToken, pagination }) {
   return (dispatch) => {
     const url = pagination && pagination.next_url ? pagination.next_url : `https://api.instagram.com/v1/users/${instagramUsername}/media/recent/?access_token=${accessToken}&count=6`
