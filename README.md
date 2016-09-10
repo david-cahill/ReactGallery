@@ -5,11 +5,16 @@ This is an example of a basic reusable React component.
 
 ## Usage
 
+`npm install --save dc-react-gallery`
+
 The gallery can currently be used to show instagram images from your own account or from a data file. 
 To use it with instagram please see the authenticate with instagram section below.
 To get started, add the following code to your React component:
 
-`<ReactGallery images={images} instagramUsername="self" accessToken="" />`
+```javascript
+import ReactGallery from 'dc-react-gallery'
+<ReactGallery images={images} instagramUsername="self" accessToken="" />
+```
 
 The `images` object must have the following structure:
 
