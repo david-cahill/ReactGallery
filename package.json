@@ -1,6 +1,6 @@
 {
   "name": "dc-react-gallery",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React component to display a gallery widget",
   "main": "dist/dc-react-gallery.js",
   "scripts": {
